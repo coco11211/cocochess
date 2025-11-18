@@ -1,0 +1,59 @@
+{
+  "name": "file-compressor-pro",
+  "version": "1.0.0",
+  "description": "A minimalistic, feature-rich file compressor with stunning dark mode UI",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 && electron .\"",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "electron": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "npm run build && electron-builder --win",
+    "dist:win": "npm run build && electron-builder --win --x64"
+  },
+  "keywords": ["file-compressor", "compression", "zip", "archive", "electron"],
+  "author": "File Compressor Pro",
+  "license": "MIT",
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^8.2.2",
+    "electron": "^28.1.0",
+    "electron-builder": "^24.9.1",
+    "vite": "^5.0.8",
+    "wait-on": "^7.2.0"
+  },
+  "dependencies": {
+    "archiver": "^6.0.1",
+    "extract-zip": "^2.0.1",
+    "framer-motion": "^10.16.16",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tar": "^6.2.0",
+    "zlib": "^1.0.5",
+    "compressing": "^1.10.0"
+  },
+  "build": {
+    "appId": "com.filecompressor.pro",
+    "productName": "File Compressor Pro",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "win": {
+      "target": ["nsis"],
+      "icon": "public/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ]
+  }
+}
